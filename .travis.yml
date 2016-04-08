@@ -1,6 +1,6 @@
 language: groovy
 jdk:
-- oraclejdk8
+- oraclejdk7
 sudo: false
 branches:
   only:
@@ -11,11 +11,7 @@ before_install:
 - source ./ala_common.sh
 - ala_travis_grails_setup_env
 script:
-- grails clean && grails refresh-dependencies --non-interactive && grails test-app
-  --non-interactive
-- jdk_switcher use oraclejdk7
-- grails prod maven-install --non-interactive && grails prod maven-deploy --repository=$MAVEN_REPO
-  --non-interactive
+- grails clean && grails refresh-dependencies --non-interactive && grails test-app --non-interactive grails prod maven-install --non-interactive && grails prod maven-deploy --repository=$MAVEN_REPO --non-interactive
 env:
   global:
   - secure: X0gg6OP+b8yDYXjXDNOw2n8PiGqkerVRthlMIniYluAmTx+bHFqUC4cv3FzgqiD9oCwOSsucXQlPbur2NPkk8U5c6NVeNVtTVhtmG2Zzcvg7xCGhAcKVq3b+HVFR9QIcE6l2faxc9N42+2p3OdO5lDqboPjLSzp+OwiYpo364M/AuSxYF9XI1TVFt1tMbKazMrfDzGMOO2Fpy26jC1ICtHVWZ8Hk3A+K24WIGW5B2cRO1wkpMpUSo7MhLD+QwHiJSp78m5t1cEZ96OYweOxvA6NEC3u8+6AewpBiRStYjbqgNjx6Mg+zCFVE5u1f3z8hP6mekTxj8eulRAgANv6j1vrFKkSJcDgBYdxSsOvI4CZWFgfkGWDeXaEX4G5n20rdwUbR2RJgqQcZr1XHUqf2erayWrEKqP+jIETueiUiVe+5eyc9g90RFTuuG/OFWOm8k8BpkWP32c2Lt+xbU8LH+/QKwYlZxP1kLBnfXdGn5C0fU/tikiK+5NOHVe8/IWi27QoBlpYOaXT3BzfGqa0Zdig4Lqzzd4DKCwqA66uh0JZk4QTL2uHPIFEdFuduMwMsmxJvsHLKRTwWTfSK1G+BE8T4Hw4rwkw1beT5IBEr6hHAt5DRdZSQQaK9EXqyDdzhVdRU2Ls2LMO1MRO+0bvMwPfft0Jngc+vBwqJljy37zk=

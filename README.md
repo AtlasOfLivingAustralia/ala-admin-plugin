@@ -21,7 +21,6 @@ The admin page can only be accessed by users with the ALA Admin role.
 1. Clone the repo
 1. Import the source into your IDE
 1. Use Grails version 2.5.2
-1. Use JDK 1.8
 
 To test changes locally, set the plugin as a local plugin on a grails application:
 
