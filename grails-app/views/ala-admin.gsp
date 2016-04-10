@@ -12,12 +12,37 @@
     <![endif]-->
 </head>
 
-<body>
-<div class="white-bg">
+<body class="white-bg">
+<div>
+    <ala:systemMessage showTimestamp="true"/>
+
     <h1>ALA Administration</h1>
     <g:if test="${flash.message}">
         <div class="alert alert-info">${flash.message}</div>
     </g:if>
+
+    <div class="panel-heading">
+        <h3>Display System Message</h3>
+    </div>
+    <div class="panel-body">
+        <g:form controller="alaAdmin" action="systemMessage">
+            <p>This will display a system message on all pages in the application (assuming they render the message).</p>
+
+            <div class="form-group">
+                <label for="message" class="control-label">Message</label>
+                <g:textField class="form-control" name="message" value="${params.text}"/>
+            </div>
+            <div class="form-group">
+                <label for="severity" class="control-label">Severity</label> <span class="small">(used to style the message using Bootstrap's alert classes)</span>
+                <g:select class="form-control" name="severity" from="${["info", "warning", "danger"]}" value="${params.severity}" />
+            </div>
+
+            <g:actionSubmit value="Set message" class="btn btn-primary" action="systemMessage"/>
+            <g:actionSubmit value="Clear message" class="btn btn-default" action="clearMessage"/>
+        </g:form>
+    </div>
+
+    <hr/>
 
     <div class="panel-heading">
         <h3>Reload Grails External Config File</h3>
@@ -28,6 +53,7 @@
             <g:actionSubmit value="Reload config" class="btn btn-primary" action="reloadConfig"/>
         </g:form>
     </div>
+
 </div>
 
 

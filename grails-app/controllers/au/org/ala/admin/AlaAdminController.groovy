@@ -5,6 +5,8 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 
 class AlaAdminController {
 
+    SystemMessageService systemMessageService
+
     def index() {
         render view: "/ala-admin"
     }
@@ -40,6 +42,29 @@ class AlaAdminController {
             stream?.close()
         }
 
-        render view: "/ala-admin"
+        redirect(action: 'index')
+    }
+
+    def systemMessage() {
+        SystemMessage message = new SystemMessage(
+                text: params.message,
+                severity: params.message ? params.severity : "",
+                timestamp: new Date(),
+                user: request.userPrincipal?.name
+        )
+
+        systemMessageService.setSystemMessage(message)
+
+        flash.message = "System message has been saved"
+
+        redirect(action: 'index')
+    }
+
+    def clearMessage() {
+        systemMessageService.setSystemMessage(null)
+
+        flash.message = "System message has been cleared"
+
+        redirect(action: 'index')
     }
 }

@@ -11,10 +11,22 @@ Grails plugin containing common administrative functionality like reloading Grai
 runtime ":ala-admin-plugin:x.y.z"
 ```
 
+## Admin page
+
 You will need to add ```/alaAdmin/?.*``` to the CAS ```uriFilterPattern``` property in order to view the Admin page. 
 You will get a HTTP 403 if you do not do this.
 
 The admin page can only be accessed by users with the ALA Admin role.
+
+## System message
+
+The system message is stored in a json file in the application's config directory under /data (```/data/[app-name]/config/system-message.json```).
+
+To display the system message, add the ```<ala:systemMessage/>``` tag to your page. 
+
+This tag will render a div with ```class="system-message alert alert-[severity]"```, so you can style it accordingly if the bootstrap alert style is not suitable.
+
+There is an optional attribute ```showTimestamp``` which, when true, will display the timestamp of when the system message was saved in brackets after the message.
 
 # Dev environment set up
 
