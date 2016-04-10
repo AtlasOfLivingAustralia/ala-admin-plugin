@@ -28,6 +28,13 @@ This tag will render a div with ```class="system-message alert alert-[severity]"
 
 There is an optional attribute ```showTimestamp``` which, when true, will display the timestamp of when the system message was saved in brackets after the message.
 
+## Build info
+
+The ala-admin plugin bundles the Grails Build-info plugin (https://grails.org/plugin/build-info), which provides a page 
+containing all application properties and dependencies. If your host application is using the default URL mappings 
+(```/$controller/$action?/$id?```), then the build info page will be available at ```.../buildInfo```. If you are not using
+the default URL mapping, then the alaAdmin plugin makes this page available under the secured path ```.../alaAdmin/buildInfo```.
+
 # Dev environment set up
 
 1. Clone the repo

@@ -42,5 +42,8 @@ grails.project.dependency.resolution = {
         compile(":cache:1.1.8") {
             export = false
         }
+        compile("org.grails.plugins:build-info:1.2.8") {
+            export = false
+        }
     }
 }

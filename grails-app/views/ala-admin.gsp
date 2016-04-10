@@ -53,6 +53,17 @@
             <g:actionSubmit value="Reload config" class="btn btn-primary" action="reloadConfig"/>
         </g:form>
     </div>
+    <hr/>
+
+    <div class="panel-heading">
+        <h3>Build information</h3>
+    </div>
+    <div class="panel-body">
+        <g:form controller="buildInfo" action="index" method="get">
+            <p>This will display a page listing all properties and dependencies of the host application</p>
+            <g:actionSubmit value="View build info" class="btn btn-primary" action="index"/>
+        </g:form>
+    </div>
 
 </div>
 
