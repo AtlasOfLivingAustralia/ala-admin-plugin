@@ -39,11 +39,7 @@ grails.project.dependency.resolution = {
             excludes "httpclient"
             export = false
         }
-        compile(":cache:1.1.8") {
-            export = false
-        }
-        compile("org.grails.plugins:build-info:1.2.8") {
-            export = false
-        }
+        compile ":cache:1.1.8"
+        compile "org.grails.plugins:build-info:1.2.8"
     }
 }
