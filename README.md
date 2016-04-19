@@ -28,12 +28,23 @@ This tag will render a div with ```class="system-message alert alert-[severity]"
 
 There is an optional attribute ```showTimestamp``` which, when true, will display the timestamp of when the system message was saved in brackets after the message.
 
+## Environment message
+
+If you include in your grails config a property called ```deployment_env``` with the name of the environment you are deploying to (e.g. prod, test, dev), then the ala-admin-plugin will display a message (using the ```<ala:systemMessage/>``` tag) on all non-production environments. A 'production' environment is one where the ```deployment_env``` property is blank, 'prod' or 'production'.
+
+You can disable the environment warning by adding the ```hideEnvWarning=true``` attribute to the ```ala:systemMessage``` tag.
+
+The environment message for a test environment would be "This is a TEST environment". This helps to avoid confusion for users who are involved in testing: they can clearly see which environment they are working in.
+
+## Styling
+
+Most features of this plugin rely on Bootstrap 3 being available. Some styles (e.g. the environment message) require the ```ala_admin``` resource bundle: ```<r:require modules="ala_admin"/>```.
+
 ## Build info
 
-The ala-admin plugin bundles the Grails Build-info plugin (https://grails.org/plugin/build-info), which provides a page 
-containing all application properties and dependencies. If your host application is using the default URL mappings 
-(```/$controller/$action?/$id?```), then the build info page will be available at ```.../buildInfo```. If you are not using
-the default URL mapping, then the alaAdmin plugin makes this page available under the secured path ```.../alaAdmin/buildInfo```.
+The ala-admin plugin bundles the Grails Build-info plugin (https://grails.org/plugin/build-info), which provides a page containing all application properties and dependencies. 
+If your host application is using the default URL mappings (```/$controller/$action?/$id?```), then the build info page will be available at ```.../buildInfo```. 
+If you are not using the default URL mapping, then the alaAdmin plugin makes this page available under the secured path ```.../alaAdmin/buildInfo```.
 
 # Dev environment set up
 
