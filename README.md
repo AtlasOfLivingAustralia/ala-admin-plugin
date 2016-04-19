@@ -18,6 +18,8 @@ You will get a HTTP 403 if you do not do this.
 
 The admin page can only be accessed by users with the ALA Admin role.
 
+You will need to include the [ala-auth-plugin](https://github.com/AtlasOfLivingAustralia/ala-auth-plugin) to do this.
+
 ## System message
 
 The system message is stored in a json file in the application's config directory under /data (```/data/[app-name]/config/system-message.json```).
