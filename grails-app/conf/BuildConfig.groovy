@@ -41,5 +41,5 @@ grails.project.dependency.resolution = {
         }
         compile ":cache:1.1.8"
         compile "org.grails.plugins:build-info:1.2.8"
-    }
+        runtime ':resources:1.2.14'  }
 }

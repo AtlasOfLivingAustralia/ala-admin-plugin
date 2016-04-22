@@ -19,6 +19,11 @@
 <div>
     <ala:systemMessage showTimestamp="true"/>
 
+    <ol class="breadcrumb hidden-print">
+        <li><a class="font-xxsmall" href="${request.contextPath}">Back to application</a></li>
+        <li class="font-xxsmall active">ALA Admin</li>
+    </ol>
+
     <h1>ALA Administration</h1>
     <g:if test="${flash.message}">
         <div class="alert alert-info">${flash.message}</div>
@@ -48,12 +53,13 @@
     <hr/>
 
     <div class="panel-heading">
-        <h3>Reload Grails External Config File</h3>
+        <h3>Grails Config</h3>
     </div>
     <div class="panel-body">
         <g:form controller="alaAdmin" action="reloadConfig">
-            <p>This will reload the external configuration properties file ${grailsApplication.config.default_config}</p>
-            <g:actionSubmit value="Reload config" class="btn btn-primary" action="reloadConfig"/>
+            <p>This lets you view the current Grails config object, and to reload the external configuration properties file ${grailsApplication.config.default_config}</p>
+            <g:actionSubmit value="Reload external config" class="btn btn-primary" action="reloadConfig"/>
+            <a href="${request.contextPath}/alaAdmin/viewConfig" class="btn btn-default">View current config</a>
         </g:form>
     </div>
     <hr/>
