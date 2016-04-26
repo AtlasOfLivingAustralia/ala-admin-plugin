@@ -20,8 +20,8 @@
     <ala:systemMessage showTimestamp="true"/>
 
     <ol class="breadcrumb hidden-print">
-        <li><a class="font-xxsmall" href="${request.contextPath}">Back to application</a></li>
-        <li><a class="font-xxsmall" href="${request.contextPath}/alaAdmin">ALA Admin</a></li>
+        <li><a class="font-xxsmall" href="${request.contextPath ?: "/"}">Back to application</a></li>
+        <li><a class="font-xxsmall" href="${request.contextPath ?: "/"}alaAdmin">ALA Admin</a></li>
         <li class="font-xxsmall active">Grails config</li>
     </ol>
 

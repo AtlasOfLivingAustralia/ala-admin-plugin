@@ -20,7 +20,7 @@
     <ala:systemMessage showTimestamp="true"/>
 
     <ol class="breadcrumb hidden-print">
-        <li><a class="font-xxsmall" href="${request.contextPath}">Back to application</a></li>
+        <li><a class="font-xxsmall" href="${request.contextPath ?: "/"}">Back to application</a></li>
         <li class="font-xxsmall active">ALA Admin</li>
     </ol>
 
