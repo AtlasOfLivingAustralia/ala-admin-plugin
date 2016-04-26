@@ -20,6 +20,22 @@ The admin page can only be accessed by users with the ALA Admin role.
 
 You will need to include the [ala-auth-plugin](https://github.com/AtlasOfLivingAustralia/ala-auth-plugin) to do this.
 
+### Embedding in another page
+
+This plugin provides the admin form as a template which you can embed in an application-specific administration page if so desired. Simple render the template with the plugin reference:
+
+```
+<g:render template="/ala-admin-form" plugin="ala-admin-plugin"/>
+```
+
+NOTE: This template does not include the flash messages (so you can put it anywhere in the page), so you'll need to include some code at the top of your page to display flash messages. E.g.
+
+```
+<g:if test="${flash.message}">
+    <div class="alert alert-info">${flash.message}</div>
+</g:if>
+```
+
 ## System message
 
 The system message is stored in a json file in the application's config directory under /data (```/data/[app-name]/config/system-message.json```).
