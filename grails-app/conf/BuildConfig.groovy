@@ -40,6 +40,8 @@ grails.project.dependency.resolution = {
             export = false
         }
         compile ":cache:1.1.8"
-        compile "org.grails.plugins:build-info:1.2.8"
-        runtime ':resources:1.2.14'  }
+        compile ":build-info:1.2.8"
+        runtime(":asset-pipeline:2.14.1") { export = false }
+        runtime(":resources:1.2.14") { export = false }
+    }
 }
