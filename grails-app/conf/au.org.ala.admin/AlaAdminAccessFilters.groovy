@@ -9,8 +9,7 @@ class AlaAdminAccessFilters {
         all(controller: 'alaAdmin', action: '*') {
             before = {
                 String actionFullName = "${controllerName.capitalize()}Controller.${actionName}"
-                List<String> usersRoles = request.userPrincipal ? request.userPrincipal?.attributes?.authority?.split(",") : []
-                boolean isALAAdmin = usersRoles?.contains(ALA_ADMIN_ROLE)
+                boolean isALAAdmin = request.isUserInRole(ALA_ADMIN_ROLE)
 
                 log.debug "Is user ${request.userPrincipal?.name} an ALA Admin user? ${isALAAdmin}"
 

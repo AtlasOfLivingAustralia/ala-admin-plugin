@@ -24,6 +24,7 @@ class AlaAdminAccessFiltersSpec extends Specification {
 
         when:
         request.userPrincipal = new User([authority: "ROLE_ADMIN"])
+        request.addUserRole('ROLE_ADMIN')
 
         withFilters(controller: "alaAdmin", action: "someAction") {
             controller.someAction()
