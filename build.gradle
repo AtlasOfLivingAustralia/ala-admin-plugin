@@ -62,15 +62,15 @@ bootRun {
 bootRepackage.enabled = false
 grailsPublish {
     // TODO: Provide values here
-    user = 'user'
-    key = 'key'
-    githubSlug = 'foo/bar'
+//    user = 'user'
+//    key = 'key'
+    githubSlug = 'AtlasOfLivingAustralia/ala-admin-plugin'
     license {
-        name = 'Apache-2.0'
+        name = 'MPL-2.0'
     }
-    title = "My Plugin"
-    desc = "Full plugin description"
-    developers = [johndoe:"John Doe"]
+    title = "ALA Admin Plugin"
+    desc = "ALA Admin Plugin"
+    developers = [:]
 }
 
 
