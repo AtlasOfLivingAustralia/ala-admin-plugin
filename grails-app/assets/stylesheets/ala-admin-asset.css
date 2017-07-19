@@ -1,3 +1,13 @@
 /*
- *= require ala-admin.css
+ *= require_self
  */
+.env-message {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.env-message-text {
+    font-size: 24px;
+}

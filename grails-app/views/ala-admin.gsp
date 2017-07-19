@@ -11,13 +11,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <plugin:isAvailable name="resources">
-        <r:require modules="ala_admin"/>
-    </plugin:isAvailable>
-    <plugin:isNotAvailable name="resources">
-        <asset:stylesheet src="ala-admin-asset.css" />
-    </plugin:isNotAvailable>
-
+    <asset:stylesheet src="ala-admin-asset.css" />
 </head>
 
 <body class="white-bg">

@@ -66,14 +66,6 @@ If you are not using the default URL mapping, then the alaAdmin plugin makes thi
 
 # Dev environment set up
 
-1. Clone the repo
-1. Import the source into your IDE
-1. Use Grails version 2.5.2
-
-To test changes locally, set the plugin as a local plugin on a grails application:
-
-1. In the host application's BuildConfig.groovy
-  1. Comment out (if present) the existing dependency on ala-admin-plugin
-  1. Add ```grails.plugin.location.ala-admin-plugin = "/path/to/local/ala-admin-plugin"```
+Use a multi-project build as described [in the Grails plugin documentation](http://docs.grails.org/latest/guide/plugins.html#creatingAndInstallingPlugins)
   
   
