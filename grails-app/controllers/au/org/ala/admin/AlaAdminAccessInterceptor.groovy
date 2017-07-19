@@ -2,7 +2,7 @@ package au.org.ala.admin
 
 import org.apache.http.HttpStatus
 
-class AlaAdminAccessFilters {
+class AlaAdminAccessInterceptor {
     static final String ALA_ADMIN_ROLE = "ROLE_ADMIN"
 
     def filters = {
@@ -11,10 +11,10 @@ class AlaAdminAccessFilters {
                 String actionFullName = "${controllerName.capitalize()}Controller.${actionName}"
                 boolean isALAAdmin = request.isUserInRole(ALA_ADMIN_ROLE)
 
-                AlaAdminAccessFilters.log.debug "Is user ${request.userPrincipal?.name} an ALA Admin user? ${isALAAdmin}"
+                AlaAdminAccessInterceptor.log.debug "Is user ${request.userPrincipal?.name} an ALA Admin user? ${isALAAdmin}"
 
                 if (!isALAAdmin) {
-                    AlaAdminAccessFilters.log.error "User ${request.userPrincipal?.name} is not authorised to access action ${actionFullName}"
+                    AlaAdminAccessInterceptor.log.error "User ${request.userPrincipal?.name} is not authorised to access action ${actionFullName}"
                     response.status = HttpStatus.SC_FORBIDDEN
                     response.sendError(HttpStatus.SC_FORBIDDEN)
                 }

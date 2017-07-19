@@ -10,10 +10,10 @@ import spock.lang.Unroll
 
 import java.security.Principal
 
-@TestFor(AlaAdminAccessFilters)
+@TestFor(AlaAdminAccessInterceptor)
 @TestMixin([GrailsUnitTestMixin, FiltersUnitTestMixin])
 @Unroll
-class AlaAdminAccessFiltersSpec extends Specification {
+class AlaAdminAccessInterceptorSpec extends Specification {
 
     void "ALA Administrators are allowed to do everything"() {
         setup:
