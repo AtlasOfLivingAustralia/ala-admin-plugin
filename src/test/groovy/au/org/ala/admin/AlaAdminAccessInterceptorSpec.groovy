@@ -5,6 +5,7 @@ import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
 import grails.test.mixin.web.InterceptorUnitTestMixin
 import org.apache.http.HttpStatus
+import org.grails.web.util.GrailsApplicationAttributes
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -12,7 +13,6 @@ import java.security.Principal
 
 @TestFor(AlaAdminAccessInterceptor)
 @TestMixin([GrailsUnitTestMixin, InterceptorUnitTestMixin])
-@Unroll
 class AlaAdminAccessInterceptorSpec extends Specification {
 
     void "ALA Administrators are allowed to do everything"() {
@@ -26,6 +26,8 @@ class AlaAdminAccessInterceptorSpec extends Specification {
         request.userPrincipal = new User([authority: "ROLE_ADMIN"])
         request.addUserRole('ROLE_ADMIN')
 
+        request.setAttribute(GrailsApplicationAttributes.CONTROLLER_NAME_ATTRIBUTE, 'alaAdmin')
+        request.setAttribute(GrailsApplicationAttributes.ACTION_NAME_ATTRIBUTE, 'someAction')
         withInterceptors(controller: "alaAdmin", action: "someAction") {
             controller.someAction()
         }
@@ -44,6 +46,8 @@ class AlaAdminAccessInterceptorSpec extends Specification {
         when:
         request.userPrincipal = new User([authority: "SOMETHING_ELSE"])
 
+        request.setAttribute(GrailsApplicationAttributes.CONTROLLER_NAME_ATTRIBUTE, 'alaAdmin')
+        request.setAttribute(GrailsApplicationAttributes.ACTION_NAME_ATTRIBUTE, 'someAction')
         withInterceptors(controller: "alaAdmin", action: "someAction") {
             controller.someAction()
         }
