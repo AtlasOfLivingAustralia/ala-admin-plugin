@@ -5,6 +5,7 @@ sudo: false
 branches:
   only:
   - master
+  - grails3
 cache:
   directories:
     - ~/.m2/repository
