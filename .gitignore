@@ -4,3 +4,6 @@
 .project
 coverage/
 target/
+
+.gradle/
+build/
