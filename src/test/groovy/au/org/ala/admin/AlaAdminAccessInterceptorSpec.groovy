@@ -3,7 +3,7 @@ package au.org.ala.admin
 import grails.test.mixin.TestFor
 import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
-import grails.test.mixin.web.FiltersUnitTestMixin
+import grails.test.mixin.web.InterceptorUnitTestMixin
 import org.apache.http.HttpStatus
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -11,7 +11,7 @@ import spock.lang.Unroll
 import java.security.Principal
 
 @TestFor(AlaAdminAccessInterceptor)
-@TestMixin([GrailsUnitTestMixin, FiltersUnitTestMixin])
+@TestMixin([GrailsUnitTestMixin, InterceptorUnitTestMixin])
 @Unroll
 class AlaAdminAccessInterceptorSpec extends Specification {
 
@@ -26,7 +26,7 @@ class AlaAdminAccessInterceptorSpec extends Specification {
         request.userPrincipal = new User([authority: "ROLE_ADMIN"])
         request.addUserRole('ROLE_ADMIN')
 
-        withFilters(controller: "alaAdmin", action: "someAction") {
+        withInterceptors(controller: "alaAdmin", action: "someAction") {
             controller.someAction()
         }
 
@@ -44,7 +44,7 @@ class AlaAdminAccessInterceptorSpec extends Specification {
         when:
         request.userPrincipal = new User([authority: "SOMETHING_ELSE"])
 
-        withFilters(controller: "alaAdmin", action: "someAction") {
+        withInterceptors(controller: "alaAdmin", action: "someAction") {
             controller.someAction()
         }
 
