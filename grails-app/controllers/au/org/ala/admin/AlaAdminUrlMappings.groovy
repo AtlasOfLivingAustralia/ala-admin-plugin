@@ -1,6 +1,6 @@
 package au.org.ala.admin
 
-class UrlMappings {
+class AlaAdminUrlMappings {
 
     static mappings = {
         "/alaAdmin/viewConfig" controller: "alaAdmin", action: [GET: "viewConfig"]
