@@ -12,7 +12,7 @@ class SystemMessageService {
 
     @CacheEvict(value = ["systemMessageCache"], allEntries = true)
     void setSystemMessage(SystemMessage message) {
-        getSystemMessageFile()?.write(new JsonBuilder([message: message?.text ? message : [:]])?.toPrettyString()) ?: ''
+        getSystemMessageFile()?.write(new JsonBuilder([message: message?.text ? message : [:]]).toPrettyString())
     }
 
     @Cacheable("systemMessageCache")
