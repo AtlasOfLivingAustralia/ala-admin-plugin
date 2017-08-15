@@ -11,3 +11,7 @@
 .env-message-text {
     font-size: 24px;
 }
+
+.system-message {
+	text-align: center;
+}
