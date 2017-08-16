@@ -15,3 +15,7 @@
 .system-message {
 	text-align: center;
 }
+
+.system-message.alert {
+	margin-bottom: 0;
+}
