@@ -59,11 +59,34 @@ The environment message for a test environment would be "This is a TEST environm
 Most features of this plugin rely on Bootstrap 3 being available. Some styles (e.g. the environment message) require the ```ala_admin``` resource bundle: ```<r:require modules="ala_admin"/>```.
 
 ## Build info
-
+### Grails 2.x
 The ala-admin plugin bundles the Grails Build-info plugin (https://grails.org/plugin/build-info), which provides a page containing all application properties and dependencies. 
 If your host application is using the default URL mappings (```/$controller/$action?/$id?```), then the build info page will be available at ```.../buildInfo```. 
-If you are not using the default URL mapping, then the alaAdmin plugin makes this page available under the secured path ```.../alaAdmin/buildInfo```.
+If you are not using the default URL mapping, then the alaAdmin plugin makes this page available under the secured path ```.../alaAdmin/buildInfo```. 
 
+### Grails 3.x
+The Build-info plugin does not work with Grails 3, so the functionality has been included in this plugin *in-situ*.
+
+"Runtime Application Status" and "Installed plugins" will be displayed automatically but if the Git build info is required, then you need to add some extra config to your app. Add the following lines to you app's **`build.gradle`**:
+
+```gradle
+  buildscript {
+      repositories {
+          maven { url "https://plugins.gradle.org/m2/" }
+      }
+      dependencies {
+          classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17"
+      }
+  }
+  apply plugin: "com.gorylenko.gradle-git-properties"
+```
+
+and these lines to **`application.yml`**:
+
+```yml
+  endpoints:
+      enabled: true
+```
 # Dev environment set up
 
 Use a multi-project build as described [in the Grails plugin documentation](http://docs.grails.org/latest/guide/plugins.html#creatingAndInstallingPlugins)

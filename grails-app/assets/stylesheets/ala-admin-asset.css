@@ -19,3 +19,9 @@
 .system-message.alert {
 	margin-bottom: 0;
 }
+
+code.git {
+    display: block;
+    padding: 0;
+    margin: 10px 0;
+}

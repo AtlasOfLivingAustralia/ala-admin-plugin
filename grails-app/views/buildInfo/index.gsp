@@ -6,9 +6,9 @@
     <meta name="breadcrumbParent" content="/alaAdmin,ALA Admin" />
     <style type="text/css">
     h1 {
-        color: #48802c;
+        /*color: #48802c;*/
         font-weight: normal;
-        font-size: 20px;
+        font-size: 24px;
         margin: .8em 0 .3em 0;
     }
 
