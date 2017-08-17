@@ -67,26 +67,16 @@ If you are not using the default URL mapping, then the alaAdmin plugin makes thi
 ### Grails 3.x
 The Build-info plugin does not work with Grails 3, so the functionality has been included in this plugin *in-situ*.
 
-"Runtime Application Status" and "Installed plugins" will be displayed automatically but if the Git build info is required, then you need to add some extra config to your app. Add the following lines to you app's **`build.gradle`**:
+"Runtime Application Status" and "Installed plugins" will be displayed automatically but if the Git build info is required, then you need to add some extra config to your app. Add the following lines to you app's **`build.gradle`** (after the `buildscript` block):
 
 ```gradle
-  buildscript {
-      repositories {
-          maven { url "https://plugins.gradle.org/m2/" }
-      }
-      dependencies {
-          classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17"
-      }
+  
+  plugins {
+      id "com.gorylenko.gradle-git-properties" version "1.4.17"
   }
-  apply plugin: "com.gorylenko.gradle-git-properties"
+
 ```
 
-and these lines to **`application.yml`**:
-
-```yml
-  endpoints:
-      enabled: true
-```
 # Dev environment set up
 
 Use a multi-project build as described [in the Grails plugin documentation](http://docs.grails.org/latest/guide/plugins.html#creatingAndInstallingPlugins)

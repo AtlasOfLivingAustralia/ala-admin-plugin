@@ -13,25 +13,12 @@
 
 <div class="alert alert-info" role="alert">
     <h3>GIT info is not configured for this project</h3>
-    To add GIT commit info, add the following lines to you app's <b>build.gradle</b>:
+    To add GIT commit info, add the following lines to you app's <b>build.gradle</b> (after the `buildscript` block)::
     <code class="git">
 <pre>
-buildscript {
-    repositories {
-        maven { url "https://plugins.gradle.org/m2/" }
-    }
-    dependencies {
-        classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17"
-    }
+plugins {
+    id "com.gorylenko.gradle-git-properties" version "1.4.17"
 }
-apply plugin: "com.gorylenko.gradle-git-properties"
-</pre>
-    </code>
-    and these lines to <b>application.yml</b>:
-    <code class="git">
-<pre>
-endpoints:
-    enabled: true
 </pre>
     </code>
 </div>
