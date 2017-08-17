@@ -35,23 +35,6 @@ class BuildInfoController {
     def index = {
         def buildInfoConfig = grailsApplication.config?.buildInfo
         def customProperties = buildInfoProperties
-        //log.error "grailsApplication?.metadata = ${grailsApplication?.metadata as JSON}"
-
-//        grailsApplication?.metadata.each { k, v ->
-//            if (k.contains("build") || k.contains("environment") || k.contains("version")) {
-//                log.error "metadata: ${k} = ${v}"
-//            }
-//        }
-
-//        def inputStream = servletContext.getResourceAsStream("/META-INF/MANIFEST.MF");
-//        def manifest = new Manifest(inputStream)
-//        buildInfo.'scm.version' = manifest.mainAttributes.getValue('Build-Scm-Revision')
-
-//        String gitInfo = getClass().getResource('main/git.properties')?.text
-//        log.warn "gitInfo 3 = ${gitInfo}"
-
-//        def resp = new RestBuilder().get("${grailsApplication.config.serverURL}/info")
-//        def json = JSON.parse(resp.text)
 
         if (buildInfoConfig?.properties?.exclude){
             customProperties -= buildInfoConfig.properties.exclude
@@ -75,7 +58,7 @@ class BuildInfoController {
                 buildInfo."git.branch" = gitInfo.git?.branch
             }
         } catch (Exception ex) {
-            log.warn "/info end point no configured for app (requires Gradle plugin, see /buildInfo page for details) - ${ex}"
+            log.warn "/info end point not configured for app (requires Gradle plugin, see /buildInfo page for details) - ${ex}"
         }
 
         def installedPlugins = [:]
@@ -95,6 +78,8 @@ class BuildInfoController {
                 installedPlugins: installedPlugins,
                 runtimeEnvironment: runtimeEnvironment
         ]
+
+        log.debug "model = ${model as JSON}"
 
         withFormat {
             html { render(view: 'index', model: model) }
