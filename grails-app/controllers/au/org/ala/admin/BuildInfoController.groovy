@@ -49,7 +49,13 @@ class BuildInfoController {
         }
 
         try {
-            Map gitInfo = new JsonSlurper().parse(new URL("${grailsApplication.config.serverURL}/info"))
+            String serverURL = grailsApplication.config.serverURL
+            if(!serverURL){
+            // some grails 3 applications only has grails.serverURL
+                serverURL = grailsApplication.config.grails.serverURL
+            }
+
+            Map gitInfo = new JsonSlurper().parse(new URL("${serverURL}/info"))
             log.debug "gitInfo = ${gitInfo as JSON}"
 
             if (gitInfo && gitInfo.containsKey("git")) {
