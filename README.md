@@ -77,6 +77,15 @@ The Build-info plugin does not work with Grails 3, so the functionality has been
 
 ```
 
+You may also need to modify `application.yml` (in `grails-app/conf`) to have:
+
+```yml
+# Spring Actuator Endpoints are Disabled by Default
+endpoints:
+    enabled: true
+
+```
+
 # Dev environment set up
 
 Use a multi-project build as described [in the Grails plugin documentation](http://docs.grails.org/latest/guide/plugins.html#creatingAndInstallingPlugins)
