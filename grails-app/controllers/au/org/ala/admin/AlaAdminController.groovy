@@ -68,25 +68,30 @@ class AlaAdminController {
 
 
     private ConfigObject getConfig() {
-        String configLocation = "file:${grailsApplication.config.default_config}"
+        def configLocations = grailsApplication.config.grails?.config?.locations?:[] 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver()
-        Resource resource = resolver.getResource(configLocation)
-        InputStream stream = null
+        ConfigObject config
 
-        ConfigObject config = null
-        try {
-            stream = resource.getInputStream()
-            ConfigSlurper configSlurper = new ConfigSlurper(Environment.current.name)
-            if (resource.filename.endsWith('.groovy')) {
-                config = configSlurper.parse(stream.text)
-            } else if (resource.filename.endsWith('.properties')) {
-                Properties props = new Properties()
-                props.load(stream)
-                config = configSlurper.parse(props)
+        configLocations.each { location ->
+            Resource resource = resolver.getResource(location)
+            InputStream stream = null
+
+            try {
+                stream = resource.getInputStream()
+                ConfigSlurper configSlurper = new ConfigSlurper(Environment.current.name)
+                if (resource.filename.endsWith('.groovy')) {
+                    config = configSlurper.parse(stream.text)
+                } else if (resource.filename.endsWith('.properties')) {
+                    Properties props = new Properties()
+                    props.load(stream)
+                    config = configSlurper.parse(props)
+                }
+                flash.message = "External config (${location}) has been reloaded"
+            } catch (Exception ex) {
+                log.warn ex.message
+            } finally {
+                stream?.close()
             }
-            flash.message = "External config has been reloaded"
-        } finally {
-            stream?.close()
         }
 
         config
