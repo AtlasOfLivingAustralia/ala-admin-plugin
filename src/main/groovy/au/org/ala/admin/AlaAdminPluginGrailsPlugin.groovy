@@ -32,7 +32,7 @@ class AlaAdminPluginGrailsPlugin extends Plugin {
     def documentation = "https://github.com/AtlasOfLivingAustralia/ala-admin-plugin"
 
     // License: one of 'APACHE', 'GPL2', 'GPL3'
-    def license = "MPL-2.0"
+    def license = "MPL-1.1"
 
     // Details of company behind the plugin (if there is one)
     def organization = [name: "Atlas of Living Australia", url: "http://ala.org.au"]
