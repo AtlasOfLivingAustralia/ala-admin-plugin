@@ -28,7 +28,6 @@ class AlaAdminController {
         } catch (Exception e) {
             log.error "Unable to reload configuration. Please correct problem and try again: ${e}", e
             flash.message = "Unable to reload configuration - " + e.getMessage()
-            redirect(action: 'index')
         }
 
         redirect(action: 'index')
@@ -38,7 +37,6 @@ class AlaAdminController {
         try {
             ConfigObject config = grailsApplication.getConfig()
             Map flattened = flatten(config, ".")
-
             render view: "/view-config", model: [config: flattened]
         } catch (Exception e) {
             log.error "Unable to view configuration. Please correct problem and try again: ${e}", e
@@ -56,7 +54,6 @@ class AlaAdminController {
         )
 
         systemMessageService.setSystemMessage(message)
-
         flash.message = "System message has been saved"
 
         redirect(action: 'index')
@@ -64,7 +61,6 @@ class AlaAdminController {
 
     def clearMessage() {
         systemMessageService.setSystemMessage(null)
-
         flash.message = "System message has been cleared"
 
         redirect(action: 'index')
