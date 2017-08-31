@@ -25,7 +25,7 @@ class AlaAdminPluginGrailsPlugin extends Plugin {
 
     def title = "ALA Admin Plugin" // Headline display name of the plugin
     def author = "Atlas of Living Australia"
-    def authorEmail = ""
+    def authorEmail = "info@ala.org.au"
     def description = "Grails plugin containing common administrative functionality."
 
     // URL to the plugin's documentation
