@@ -25,7 +25,10 @@
 
     <h1>ALA Administration</h1>
     <g:if test="${flash.message}">
-        <div class="alert alert-info">${flash.message}</div>
+        <div class="alert alert-info">${raw(flash.message)}</div>
+    </g:if>
+    <g:if test="${flash.error}">
+        <div class="alert alert-warning">${raw(flash.error)}</div>
     </g:if>
 
     <g:render template="/ala-admin-form"/>
