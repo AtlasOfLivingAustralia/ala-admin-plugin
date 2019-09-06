@@ -17,10 +17,14 @@ package au.org.ala.admin
 import grails.converters.JSON
 import grails.converters.XML
 import grails.util.Environment
-import groovy.json.JsonSlurper
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.info.GitProperties
 
 class BuildInfoController {
     def pluginManager
+
+    @Autowired(required = false)
+    GitProperties gitProperties
 
     static final List buildInfoProperties = [
             'info.app.build.date',
@@ -48,27 +52,16 @@ class BuildInfoController {
             buildInfo."${it}" = grailsApplication?.metadata[it]
         }
 
-        try {
-            String serverURL = grailsApplication.config.serverURL
-            if(!serverURL){
-            // some grails 3 applications only has grails.serverURL
-                serverURL = grailsApplication.config.grails.serverURL
-            }
+        if (gitProperties) {
+            buildInfo."git.commit.date" = gitProperties.commitTime ? g.formatDate(date: gitProperties.commitTime, format:"yyyy-MM-dd'T'HH:mm:ssZ") : ""
+            buildInfo."git.commit.id" = gitProperties.commitId
+            buildInfo."git.commit.shortId" = gitProperties.shortCommitId
+            buildInfo."git.branch" = gitProperties.branch
 
-            Map gitInfo = new JsonSlurper().parse(new URL("${serverURL}/info"))
-            log.debug "gitInfo = ${gitInfo as JSON}"
-
-            if (gitInfo && gitInfo.containsKey("git")) {
-                buildInfo."git.commit.date" = gitInfo.git?.commit?.time ? "${g.formatDate(date:new Date(gitInfo.git.commit.time), format:"yyyy-MM-dd'T'HH:mm:ssZ")}": ""
-                buildInfo."git.commit.id" = gitInfo.git?.commit?.id
-                buildInfo."git.branch" = gitInfo.git?.branch
-            }
-        } catch (Exception ex) {
-            log.warn "/info end point not configured for app (requires Gradle plugin, see /buildInfo page for details) - ${ex}"
         }
 
         def installedPlugins = [:]
-        pluginManager?.allPlugins?.sort({it.name.toUpperCase()}).each {
+        pluginManager?.allPlugins?.sort({it.name.toUpperCase()})?.each {
             installedPlugins."${it.name}" = it.version
         }
 

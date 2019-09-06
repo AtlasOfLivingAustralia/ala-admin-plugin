@@ -22,11 +22,4 @@ plugins {
 </pre>
     </code>
   You may also need to modify <b>application.yml</b> to be:
-  <code class="git">
-<pre>
-# Spring Actuator Endpoints are Disabled by Default
-endpoints:
-    enabled: true
-</pre>
-    </code>
 </div>

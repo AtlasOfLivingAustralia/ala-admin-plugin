@@ -38,8 +38,6 @@
     <h3>Build information</h3>
 </div>
 <div class="panel-body">
-    <g:form controller="buildInfo" action="index" method="get">
-        <p>This will display a page listing all properties and dependencies of the host application</p>
-        <g:actionSubmit value="View build info" class="btn btn-primary" action="index"/>
-    </g:form>
+    <p>This will display a page listing all properties and dependencies of the host application</p>
+    <g:link controller="buildInfo" action="index" class="btn btn-primary">View build info</g:link>
 </div>
