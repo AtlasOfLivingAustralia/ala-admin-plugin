@@ -72,17 +72,8 @@ The Build-info plugin does not work with Grails 3, so the functionality has been
 ```gradle
   
   plugins {
-      id "com.gorylenko.gradle-git-properties" version "1.4.17"
+      id "com.gorylenko.gradle-git-properties" version "2.1.0"
   }
-
-```
-
-You may also need to modify `application.yml` (in `grails-app/conf`) to have:
-
-```yml
-# Spring Actuator Endpoints are Disabled by Default
-endpoints:
-    enabled: true
 
 ```
 
