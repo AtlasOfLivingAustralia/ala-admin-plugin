@@ -3,15 +3,16 @@
 </div>
 <div class="panel-body">
     <g:form controller="alaAdmin" action="systemMessage">
+        <g:set bean="systemMessageService" var="sms" />
         <p>This will display a system message on all pages in the application (assuming they render the message).</p>
 
         <div class="form-group">
             <label for="message" class="control-label">Message</label>
-            <g:textField class="form-control" name="message" value="${params.text}"/>
+            <g:textField class="form-control" name="message" value="${sms.systemMessage?.text}"/>
         </div>
         <div class="form-group">
             <label for="severity" class="control-label">Severity</label> <span class="small">(used to style the message using Bootstrap's alert classes)</span>
-            <g:select class="form-control" name="severity" from="${["info", "warning", "danger"]}" value="${params.severity}" />
+            <g:select class="form-control" name="severity" from="${["info", "warning", "danger"]}" value="${sms.systemMessage?.severity}" />
         </div>
 
         <g:actionSubmit value="Set message" class="btn btn-primary" action="systemMessage"/>
