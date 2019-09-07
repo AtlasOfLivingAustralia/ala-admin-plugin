@@ -23,6 +23,10 @@ class AlaAdminPluginGrailsPlugin extends Plugin {
             "grails-app/views/error.gsp"
     ]
 
+    // security.cas.uriFilterPattern will be updated with the admin page when it is missing. This must occur before
+    // ala-auth is loaded.
+    def loadBefore = ['ala-auth']
+
     def title = "ALA Admin Plugin" // Headline display name of the plugin
     def author = "Atlas of Living Australia"
     def authorEmail = "info@ala.org.au"
@@ -40,19 +44,34 @@ class AlaAdminPluginGrailsPlugin extends Plugin {
     def doWithWebDescriptor = { xml ->
     }
 
-    def doWithSpring = {
-    }
+    Closure doWithSpring() {
+        { ->
+            // inject admin page into security.cas.uriFilterPattern
+            def casFilter = grailsApplication.config.security.cas.uriFilterPattern
+            def adminPageFilter = '/alaAdmin/?.*'
+            if (!casFilter.split(',').contains(adminPageFilter)) {
+                if (casFilter) {
+                    casFilter += ','
+                }
+                casFilter += adminPageFilter
 
-    def doWithDynamicMethods = { ctx ->
-    }
-
-    def doWithApplicationContext = { ctx ->
+                grailsApplication.config.security.cas.uriFilterPattern = casFilter
+            }
+        }
     }
 
     def onChange = { event ->
     }
 
-    def onConfigChange = { event ->
+    @Override
+    void onConfigChange(Map<String, Object> event) {
+        super.onConfigChange(event)
+
+        // re-init the configService
+        ConfigService configService = applicationContext.getBean(ConfigService)
+        if (configService) {
+            configService.init()
+        }
     }
 
     def onShutdown = { event ->

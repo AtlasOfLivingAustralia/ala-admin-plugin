@@ -13,10 +13,7 @@ runtime ":ala-admin-plugin:x.y.z"
 
 ## Admin page
 
-You will need to add ```/alaAdmin/?.*``` to the CAS ```uriFilterPattern``` property in order to view the Admin page. 
-You will get a HTTP 403 if you do not do this.
-
-The admin page can only be accessed by users with the ALA Admin role.
+The admin page ```/alaAdmin``` can only be accessed by users with the ALA Admin role.
 
 You will need to include the [ala-auth-plugin](https://github.com/AtlasOfLivingAustralia/ala-auth-plugin) to do this.
 
@@ -53,6 +50,12 @@ If you include in your grails config a property called ```deployment_env``` with
 You can disable the environment warning by adding the ```hideEnvWarning=true``` attribute to the ```ala:systemMessage``` tag.
 
 The environment message for a test environment would be "This is a TEST environment". This helps to avoid confusion for users who are involved in testing: they can clearly see which environment they are working in.
+
+## Disabling automatic configuration reload
+
+Use configuration ```grails.config.autoReload=false``` to disable the automatic reloading of configuration files found at ```grails.config.locations```.
+
+When automatic configuration reload is disabled they can be reloaded manually through the admin page ```/alaAdmin```.
 
 ## Styling
 
