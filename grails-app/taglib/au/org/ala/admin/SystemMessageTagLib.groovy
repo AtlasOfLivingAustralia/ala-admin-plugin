@@ -23,13 +23,14 @@ class SystemMessageTagLib {
     private void showNonProductionEnvironmentWarning(out, attrs) {
         if (isNonProductionEnvironment() && !attrs.hideEnvWarning?.toBoolean()) {
             out << """<div class="padding-top-1 alert alert-warning env-message">
-                          <div class="env-message-text">This is a ${grailsApplication.config.deployment_env.toUpperCase()} site.</div>
+                          <div class="env-message-text">This is a ${grailsApplication.config.getProperty('deployment_env').toUpperCase()} site.</div>
                       </div>
                    """.stripIndent()
         }
     }
 
     private boolean isNonProductionEnvironment() {
-        grailsApplication.config.deployment_env && grailsApplication.config.deployment_env?.toLowerCase() != "prod" && grailsApplication.config.deployment_env?.toLowerCase() != "production"
+        def env = grailsApplication.config.getProperty('deployment_env')
+        env && env?.toLowerCase() != "prod" && env?.toLowerCase() != "production"
     }
 }

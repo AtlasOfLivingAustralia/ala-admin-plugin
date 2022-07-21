@@ -34,13 +34,13 @@ class SystemMessageService {
     private File getSystemMessageFile() {
         File systemMsgFile
         try {
-            def path = grailsApplication.config.ala.admin.systemMessage.path ?: "/data/${Metadata.current.getApplicationName()}/config"
+            def path = grailsApplication.config.getProperty('ala.admin.systemMessage.path') ?: "/data/${Metadata.current.getApplicationName()}/config"
             File dataDir = new File(path)
             if (!dataDir.exists()) {
                 dataDir.mkdirs()
             }
 
-            def fileName = grailsApplication.config.ala.admin.systemMessage.fileName ?: "system-message.json"
+            def fileName = grailsApplication.config.getProperty('ala.admin.systemMessage.fileName') ?: "system-message.json"
             systemMsgFile = new File(dataDir, fileName)
             if (!systemMsgFile.exists()) {
                 systemMsgFile.createNewFile()

@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>Build Info</title>
-    <meta name="layout" content="${grailsApplication.config.skin.layout}"/>
+    <meta name="layout" content="${grailsApplication.config.getProperty('skin.layout')}"/>
     <meta name="breadcrumb" content="${g.message(code:'plugin.title')}" />
     <meta name="breadcrumbParent" content="/alaAdmin,ALA Admin" />
     <style type="text/css">

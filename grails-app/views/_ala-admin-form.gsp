@@ -27,7 +27,7 @@
 </div>
 <div class="panel-body">
     <g:form controller="alaAdmin" action="reloadConfig">
-        <p>This lets you view the current Grails config object, and to reload the external configuration properties file ${grailsApplication.config.default_config}</p>
+        <p>This lets you view the current Grails config object, and to reload the external configuration properties file ${grailsApplication.config.getProperty('default_config')}</p>
         <g:actionSubmit value="Reload external config" class="btn btn-primary" action="reloadConfig"/>
         <a href="${request.contextPath}/alaAdmin/viewConfig" class="btn btn-default">View current config</a>
     </g:form>

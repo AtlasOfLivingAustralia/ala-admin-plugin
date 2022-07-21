@@ -91,7 +91,7 @@ class AlaAdminController {
      * @return ConfigObject
      */
     private ConfigObject getConfig() {
-        def configLocations = grailsApplication.config.getProperty("grails.config.locations") ? grailsApplication.config.grails.config.locations : []
+        def configLocations = grailsApplication.config.getProperty("grails.config.locations", List, [])
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver()
         ConfigObject config = new ConfigObject()
 
