@@ -1,6 +1,7 @@
 <h1><g:message code="runtime.app.status"/></h1>
 
 <table>
+    <tbody>
     <tr>
         <td><g:message code="grails.env"/></td><td>${runtimeEnvironment.environment}</td>
     </tr>
@@ -13,4 +14,5 @@
     <tr>
         <td><g:message code="java.version"/></td><td>${runtimeEnvironment.'java.version'}</td>
     </tr>
+    </tbody>
 </table>

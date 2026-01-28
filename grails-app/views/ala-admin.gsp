@@ -18,10 +18,18 @@
 <div>
     <ala:systemMessage showTimestamp="true"/>
 
-    <ol class="breadcrumb hidden-print">
-        <li><a class="font-xxsmall" href="${request.contextPath ?: "/"}">Back to application</a></li>
-        <li class="font-xxsmall active">ALA Admin</li>
-    </ol>
+    <nav aria-label="breadcrumb" class="d-print-none">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a class="font-xxsmall" href="${request.contextPath ?: "/"}">
+                    Back to application
+                </a>
+            </li>
+            <li class="breadcrumb-item active font-xxsmall" aria-current="page">
+                ALA Admin
+            </li>
+        </ol>
+    </nav>
 
     <h1>ALA Administration</h1>
     <g:if test="${flash.message}">

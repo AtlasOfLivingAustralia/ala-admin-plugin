@@ -16,13 +16,13 @@ class SystemMessageTagLib {
         SystemMessage message = systemMessageService.getSystemMessage()
 
         if (message?.text) {
-            out << "<div class='padding-top-1 system-message alert alert-${message.severity}'>${message.text}${attrs.showTimestamp?.toBoolean() ? ' (' + message.timestamp + ')' : ''}</div>"
+            out << "<div class='pt-1 system-message alert alert-${message.severity}'>${message.text}${attrs.showTimestamp?.toBoolean() ? ' (' + message.timestamp + ')' : ''}</div>"
         }
     }
 
     private void showNonProductionEnvironmentWarning(out, attrs) {
         if (isNonProductionEnvironment() && !attrs.hideEnvWarning?.toBoolean()) {
-            out << """<div class="padding-top-1 alert alert-warning env-message">
+            out << """<div class="pt-1 alert alert-warning env-message">
                           <div class="env-message-text">This is a ${grailsApplication.config.getProperty('deployment_env').toUpperCase()} site.</div>
                       </div>
                    """.stripIndent()
