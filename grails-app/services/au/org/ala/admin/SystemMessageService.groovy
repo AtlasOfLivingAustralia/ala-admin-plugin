@@ -10,7 +10,7 @@ class SystemMessageService {
 
     def grailsApplication
 
-    @CacheEvict(value = ["systemMessageCache"], allEntries = true)
+    @CacheEvict(value = "systemMessageCache", allEntries = true)
     void setSystemMessage(SystemMessage message) {
         getSystemMessageFile()?.write(new JsonBuilder([message: message?.text ? message : [:]]).toPrettyString())
     }
