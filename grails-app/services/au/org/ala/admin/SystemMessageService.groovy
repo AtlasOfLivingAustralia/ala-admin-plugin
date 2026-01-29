@@ -17,18 +17,16 @@ class SystemMessageService {
 
     @Cacheable("systemMessageCache")
     SystemMessage getSystemMessage() {
-        SystemMessage message = null
-
         File msgFile = getSystemMessageFile()
+
         if (msgFile?.text) {
             Map json = new JsonSlurper().parseText(msgFile.text)
-
             if (json?.message) {
-                message = new SystemMessage(json?.message)
+                return new SystemMessage(json.message)
             }
         }
 
-        message
+        return new SystemMessage([:])
     }
 
     private File getSystemMessageFile() {
