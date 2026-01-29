@@ -16,7 +16,7 @@ class SystemMessageTagLib {
         SystemMessage message = systemMessageService.getSystemMessage()
 
         if (message?.text) {
-            out << "<div class='pt-1 system-message alert alert-${message.severity}'>${message.text}${attrs.showTimestamp?.toBoolean() ? ' (' + message.timestamp + ')' : ''}</div>"
+            out << "<div class='pt-1 m-3 system-message alert alert-${message.severity}'>${message.text}${attrs.showTimestamp?.toBoolean() ? ' (' + message.timestamp + ')' : ''}</div>"
         }
     }
 
