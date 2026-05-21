@@ -1,10 +1,10 @@
 package au.org.ala.admin
 
-import grails.plugin.cache.CacheEvict
-import grails.plugin.cache.Cacheable
 import grails.util.Metadata
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.Cacheable
 
 class SystemMessageService {
 

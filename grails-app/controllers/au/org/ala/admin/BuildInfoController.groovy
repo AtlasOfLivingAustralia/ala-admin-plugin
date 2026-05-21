@@ -14,13 +14,16 @@
 
 package au.org.ala.admin
 
-import grails.converters.JSON
-import grails.converters.XML
+import grails.artefact.Controller
 import grails.util.Environment
+import groovy.json.JsonOutput
+import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.info.GitProperties
+import java.text.SimpleDateFormat
 
-class BuildInfoController {
+@Slf4j
+class BuildInfoController implements Controller {
     def pluginManager
 
     @Autowired(required = false)
@@ -36,7 +39,7 @@ class BuildInfoController {
             'environment.GIT_COMMIT'
     ]
 
-    def index = {
+    def index() {
         def buildInfoConfig = grailsApplication.config?.buildInfo
         def customProperties = buildInfoProperties
 
@@ -53,7 +56,7 @@ class BuildInfoController {
         }
 
         if (gitProperties) {
-            buildInfo."git.commit.date" = gitProperties.commitTime ? g.formatDate(date: gitProperties.commitTime, format:"yyyy-MM-dd'T'HH:mm:ssZ") : ""
+            buildInfo."git.commit.date" = gitProperties.commitTime ? new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(Date.from(gitProperties.commitTime)) : ""
             buildInfo."git.commit.id" = gitProperties.commitId
             buildInfo."git.commit.shortId" = gitProperties.shortCommitId
             buildInfo."git.branch" = gitProperties.branch
@@ -78,12 +81,11 @@ class BuildInfoController {
                 runtimeEnvironment: runtimeEnvironment
         ]
 
-        log.debug "model = ${model as JSON}"
+        log.debug "model = ${JsonOutput.toJson(model)}"
 
         withFormat {
             html { render(view: 'index', model: model) }
-            json { render model as JSON }
-            xml { render model as XML }
+            json { render(contentType: 'application/json', text: JsonOutput.toJson(model)) }
         }
     }
 }

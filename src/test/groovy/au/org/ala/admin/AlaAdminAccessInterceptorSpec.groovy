@@ -1,19 +1,12 @@
 package au.org.ala.admin
 
-import grails.test.mixin.TestFor
-import grails.test.mixin.TestMixin
-import grails.test.mixin.support.GrailsUnitTestMixin
-import grails.test.mixin.web.InterceptorUnitTestMixin
+import grails.testing.web.interceptor.InterceptorUnitTest
 import org.apache.http.HttpStatus
 import org.grails.web.util.GrailsApplicationAttributes
 import spock.lang.Specification
-import spock.lang.Unroll
-
 import java.security.Principal
 
-@TestFor(AlaAdminAccessInterceptor)
-@TestMixin([GrailsUnitTestMixin, InterceptorUnitTestMixin])
-class AlaAdminAccessInterceptorSpec extends Specification {
+class AlaAdminAccessInterceptorSpec extends Specification implements InterceptorUnitTest<AlaAdminAccessInterceptor> {
 
     void "ALA Administrators are allowed to do everything"() {
         setup:
