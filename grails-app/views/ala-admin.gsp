@@ -18,20 +18,10 @@
 <div class="px-5">
     <ala:systemMessage showTimestamp="true"/>
 
-    <nav aria-label="breadcrumb" class="d-print-none">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a class="font-xxsmall" href="${request.contextPath ?: "/"}">
-                    Back to application
-                </a>
-            </li>
-            <li class="breadcrumb-item active font-xxsmall" aria-current="page">
-                ALA Admin
-            </li>
-        </ol>
-    </nav>
-
-    <h2 class="mb-4">ALA Administration</h2>
+    <div class="mb-4" style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="margin: 0;">ALA Administration</h2>
+        <a class="font-xxsmall" href="${request.contextPath ?: "/"}">Back to application</a>
+    </div>
     <g:if test="${flash.message}">
         <div class="alert alert-info">${raw(flash.message)}</div>
     </g:if>
@@ -40,10 +30,6 @@
     </g:if>
 
     <g:render template="/ala-admin-form"/>
-
 </div>
-
-
-
 </body>
 </html>
