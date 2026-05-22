@@ -18,37 +18,46 @@
 <div>
     <ala:systemMessage showTimestamp="true"/>
 
-    <ol class="breadcrumb hidden-print">
-        <li><a class="font-xxsmall" href="${request.contextPath ?: "/"}">Back to application</a></li>
-        <li><a class="font-xxsmall" href="${request.contextPath ?: "/"}alaAdmin">ALA Admin</a></li>
-        <li class="font-xxsmall active">Grails config</li>
-    </ol>
+    <nav aria-label="breadcrumb" class="d-print-none">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a class="font-xxsmall" href="${request.contextPath ?: "/"}">Back to application</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a class="font-xxsmall" href="${request.contextPath ?: "/"}alaAdmin">ALA Admin</a>
+            </li>
+            <li class="breadcrumb-item active font-xxsmall" aria-current="page">
+                Grails config
+            </li>
+        </ol>
+    </nav>
 
     <h1>ALA Administration</h1>
 
-    <div class="panel-heading">
-        <h2>Grails config</h2>
-    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2 class="mb-0">Grails config</h2>
+        </div>
 
-    <div class="panel-body">
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead>
-                <tr>
-                    <th scope="row">Property</th>
-                    <th scope="row">Value</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <g:each in="${config.entrySet().sort { it.key }.flatten()}" var="prop">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
                     <tr>
-                        <td>${prop.key}</td>
-                        <td>${prop.value}</td>
-                </g:each>
-                </tbody>
-            </table>
-
+                        <th scope="col">Property</th>
+                        <th scope="col">Value</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <g:each in="${config.entrySet().sort { it.key }.flatten()}" var="prop">
+                        <tr>
+                            <td>${prop.key}</td>
+                            <td>${prop.value}</td>
+                        </tr>
+                    </g:each>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

@@ -15,15 +15,23 @@
 </head>
 
 <body class="white-bg">
-<div>
+<div class="px-5">
     <ala:systemMessage showTimestamp="true"/>
 
-    <ol class="breadcrumb hidden-print">
-        <li><a class="font-xxsmall" href="${request.contextPath ?: "/"}">Back to application</a></li>
-        <li class="font-xxsmall active">ALA Admin</li>
-    </ol>
+    <nav aria-label="breadcrumb" class="d-print-none">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a class="font-xxsmall" href="${request.contextPath ?: "/"}">
+                    Back to application
+                </a>
+            </li>
+            <li class="breadcrumb-item active font-xxsmall" aria-current="page">
+                ALA Admin
+            </li>
+        </ol>
+    </nav>
 
-    <h1>ALA Administration</h1>
+    <h2 class="mb-4">ALA Administration</h2>
     <g:if test="${flash.message}">
         <div class="alert alert-info">${raw(flash.message)}</div>
     </g:if>
