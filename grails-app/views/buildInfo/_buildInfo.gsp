@@ -1,11 +1,13 @@
 <h1><g:message code="plugin.title"/> </h1>
     <g:if test="${buildInfoProperties}">
         <table>
-            <g:each in="${buildInfoProperties}" var="key,value">
-                <tr>
-                    <td><g:message code="${key}"/></td><td>${value}</td>
-                </tr>
-            </g:each>
+            <tbody>
+                <g:each in="${buildInfoProperties}" var="key,value">
+                    <tr>
+                        <td><g:message code="${key}"/></td><td>${value}</td>
+                    </tr>
+                </g:each>
+            </tbody>
         </table>
     </g:if>
     <g:else>
