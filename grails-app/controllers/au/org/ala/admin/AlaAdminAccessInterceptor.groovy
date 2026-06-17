@@ -1,6 +1,6 @@
 package au.org.ala.admin
 
-import org.apache.http.HttpStatus
+import org.springframework.http.HttpStatus
 
 class AlaAdminAccessInterceptor {
     static final String ALA_ADMIN_ROLE = "ROLE_ADMIN"
@@ -17,8 +17,8 @@ class AlaAdminAccessInterceptor {
 
         if (!isALAAdmin) {
             log.error "User ${request.userPrincipal?.name} is not authorised to access action ${actionFullName}"
-            response.status = HttpStatus.SC_FORBIDDEN
-            response.sendError(HttpStatus.SC_FORBIDDEN)
+            response.status = HttpStatus.FORBIDDEN.value()
+            response.sendError(HttpStatus.FORBIDDEN.value())
         }
 
         return isALAAdmin

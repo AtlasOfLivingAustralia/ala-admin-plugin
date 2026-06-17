@@ -6,6 +6,7 @@ Grails plugin containing common administrative functionality like reloading Grai
 
 
 # Usage
+The latest version is: 3.0.0-SNAPSHOT, which supports Grails 7.1.1. NOTES: Grails 7.1.1 is not compatible with Grails 6
 
 ```
 runtime ":ala-admin-plugin:x.y.z"
