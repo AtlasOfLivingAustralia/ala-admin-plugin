@@ -36,7 +36,7 @@ repositories {
 }
 
 dependencies {
-    implementation platform("org.apache.grails:grails-bom:$grailsVersion")
+    compileOnly platform("org.apache.grails:grails-bom:$grailsVersion")
     testImplementation platform("org.apache.grails:grails-bom:$grailsVersion")
 
     implementation "org.springframework.boot:spring-boot-starter-logging"
@@ -48,11 +48,13 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-tomcat"
     implementation "cloud.wondrify:asset-pipeline-grails:5.0.32"
-    implementation "org.apache.grails:grails-core"
+    compileOnly "org.apache.grails:grails-core"
+    testImplementation "org.apache.grails:grails-core"
     compileOnly "org.apache.grails:grails-controllers"
     profile "org.apache.grails.profiles:web-plugin"
     console "org.apache.grails:grails-console"
-    implementation "org.apache.grails:grails-web-boot"
+    compileOnly "org.apache.grails:grails-web-boot"
+    testImplementation "org.apache.grails:grails-web-boot"
     gspCompile "org.apache.grails:grails-gsp"
 
     //runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:2.14.2"
@@ -89,19 +91,6 @@ publishing {
     }
     publications {
         mavenJar(MavenPublication) {
-            pom.withXml {
-                def pomNode = asNode()
-                pomNode.dependencyManagement.replaceNode {}
-
-                // simply remove dependencies without a version
-                // version-less dependencies are handled with dependencyManagement
-                // see https://github.com/spring-gradle-plugins/dependency-management-plugin/issues/8 for more complete solutions
-                pomNode.dependencies.dependency.findAll {
-                    it.version.text().isEmpty()
-                }.each {
-                    it.replaceNode {}
-                }
-            }
             from components.java
 
         }
