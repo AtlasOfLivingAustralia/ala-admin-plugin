@@ -4,11 +4,9 @@ import grails.testing.web.interceptor.InterceptorUnitTest
 import org.apache.http.HttpStatus
 import org.grails.web.util.GrailsApplicationAttributes
 import spock.lang.Specification
-import spock.lang.Unroll
-
 import java.security.Principal
 
-class AlaAdminAccessInterceptorSpec extends Specification implements InterceptorUnitTest<AlaAdminAccessInterceptor>{
+class AlaAdminAccessInterceptorSpec extends Specification implements InterceptorUnitTest<AlaAdminAccessInterceptor> {
 
     void "ALA Administrators are allowed to do everything"() {
         setup:

@@ -13,7 +13,10 @@
 
 package au.org.ala.admin
 
+import grails.artefact.Controller
+import grails.web.Action
 import grails.util.Environment
+import groovy.util.logging.Slf4j
 import org.grails.config.PropertySourcesConfig
 import org.grails.config.yaml.YamlPropertySourceLoader
 import org.springframework.core.io.Resource
@@ -22,10 +25,12 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 /**
  * Controller for ALA admin functions (requires ROLE_ADMIN)
  */
-class AlaAdminController {
+@Slf4j
+class AlaAdminController implements Controller {
 
     SystemMessageService systemMessageService
 
+    @Action
     def index() {
         render view: "/ala-admin"
     }
@@ -40,6 +45,7 @@ class AlaAdminController {
     }
 
 
+    @Action
     def reloadConfig() {
         try {
             grailsApplication.getConfig().merge(getConfig())
@@ -51,6 +57,7 @@ class AlaAdminController {
         redirect(action: 'index')
     }
 
+    @Action
     def viewConfig() {
         try {
             ConfigObject config = grailsApplication.getConfig()
@@ -63,6 +70,7 @@ class AlaAdminController {
         }
     }
 
+    @Action
     def systemMessage() {
         SystemMessage message = new SystemMessage(
                 text: params.message,
@@ -77,6 +85,7 @@ class AlaAdminController {
         redirect(action: 'index')
     }
 
+    @Action
     def clearMessage() {
         systemMessageService.setSystemMessage(null)
         flash.message = "System message has been cleared"
