@@ -120,8 +120,10 @@ class AlaAdminController implements Controller {
                     props = new Properties()
                     props.load(stream)
                 } else if (resource.filename.endsWith('.yml')) {
-                    def mapPropertySource = new YamlPropertySourceLoader().load( "yml config", resource, null )
-                    props = new PropertySourcesConfig(mapPropertySource.getSource()).toProperties()
+                    def yamlPropertySources = new YamlPropertySourceLoader().load("yml config", resource, null)
+                    if (yamlPropertySources) {
+                        props = new PropertySourcesConfig(yamlPropertySources[0].getSource()).toProperties()
+                    }
                 }
 
                 if (props) {
