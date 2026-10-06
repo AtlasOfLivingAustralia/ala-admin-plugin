@@ -35,16 +35,6 @@ class AlaAdminController implements Controller {
         render view: "/ala-admin"
     }
 
-    private Map flatten(Map m, String separator = '.') {
-        m.collectEntries { key, value ->
-            value instanceof Map ?
-                    flatten(value, separator).collectEntries { nestedKey, nestedValue ->
-                        [(key + separator + nestedKey): nestedValue]
-                    } : [(key): value]
-        }
-    }
-
-
     @Action
     def reloadConfig() {
         try {
@@ -60,8 +50,8 @@ class AlaAdminController implements Controller {
     @Action
     def viewConfig() {
         try {
-            ConfigObject config = grailsApplication.getConfig()
-            Map flattened = flatten(config, ".")
+            Map config = grailsApplication.getConfig()
+            Map<String, Object> flattened = ConfigUtility.flatten(config, ".")
             render view: "/view-config", model: [config: flattened]
         } catch (Exception e) {
             log.error "Unable to view configuration. Please correct problem and try again: ${e}", e
