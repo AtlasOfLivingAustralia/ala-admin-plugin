@@ -31,25 +31,25 @@ class ConfigUtility {
 
     /**
      * Flattens a nested Map (such as a ConfigObject) into a single-level Map
-     * with dot-separated key paths.
+     * with dot-separated key paths, and sanitises sensitive values.
      */
-     static Map<String, Object> flatten(Map<?, ?> sourceMap, String separator = '.') {
-        Map<String, Object> result = [:]
-        if (!sourceMap) return result
+    static Map<String, Object> flatten(Map<?, ?> sourceMap, String separator = '.') {
+        Map<String, Object> flattened = [:]
+        flattenMap(flattened, sourceMap, "", separator)
+        return sanitise(flattened)
+    }
+
+    private static void flattenMap(Map<String, Object> result, Map<?, ?> sourceMap, String prefix, String separator) {
+        if (!sourceMap) return
 
         sourceMap.each { Object key, Object value ->
-            String prefix = key.toString()
+            String fullKey = prefix ? "${prefix}${separator}${key}" : key.toString()
             if (value instanceof Map) {
-                Map<String, Object> nested = flatten((Map<?, ?>) value, separator)
-                nested.each { String nestedKey, Object nestedValue ->
-                    result["${prefix}${separator}${nestedKey}".toString()] = nestedValue
-                }
+                flattenMap(result, (Map<?, ?>) value, fullKey, separator)
             } else {
-                result[prefix] = value
+                result[fullKey] = value
             }
         }
-
-        return sanitise(result)
     }
 
     /**
@@ -60,8 +60,19 @@ class ConfigUtility {
         if (!flattenedConfig) return [:]
 
         flattenedConfig.collectEntries { String key, Object value ->
-            [key: isSensitiveKey(key) ? maskValue(value) : value]
+            [(key): isSensitive(key, value) ? maskValue(value) : value]
         }
+    }
+
+    /**
+     * Determines whether a key/value pair should be masked.
+     * Booleans (e.g. auth.enabled) and non-sensitive keys are not masked.
+     */
+    private static boolean isSensitive(String key, Object value) {
+        if (value instanceof Boolean) {
+            return false
+        }
+        return isSensitiveKey(key)
     }
 
     /**
@@ -70,6 +81,10 @@ class ConfigUtility {
     private static boolean isSensitiveKey(String key) {
         if (!key) return false
         String lowerKey = key.toLowerCase()
+        if (lowerKey.endsWith('.enabled') || lowerKey.endsWith('.disabled') ||
+            lowerKey.endsWith('.enable') || lowerKey.endsWith('.disable')) {
+            return false
+        }
         SENSITIVE_KEY_PATTERNS.any { pattern -> lowerKey.contains(pattern) }
     }
 
@@ -80,8 +95,11 @@ class ConfigUtility {
         if (value == null) return null
 
         String strValue = value.toString()
-        int length = strValue.length()
+        if (strValue.isEmpty()) {
+            return ""
+        }
 
+        int length = strValue.length()
         if (length <= 4) {
             return '****'
         }
