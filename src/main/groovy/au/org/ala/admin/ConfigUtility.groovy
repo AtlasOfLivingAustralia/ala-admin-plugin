@@ -26,7 +26,7 @@ class ConfigUtility {
      */
     private static final List<String> SENSITIVE_KEY_PATTERNS = [
         'password', 'secret', 'key', 'token', 'credential',
-        'private', 'auth', 'bearer', 'signature', 'pwd'
+        'private', 'bearer', 'signature', 'pwd'
     ]
 
     /**
