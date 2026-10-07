@@ -24,6 +24,11 @@ configurations {
 version "2.4.0"
 group "org.grails.plugins"
 
+java {
+    sourceCompatibility = JavaVersion.toVersion("11")
+    targetCompatibility = JavaVersion.toVersion("11")
+}
+
 dependencies {
     implementation platform("org.grails:grails-bom:$grailsVersion")
     compileOnly "org.grails:grails-plugin-services"
