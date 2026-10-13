@@ -113,6 +113,82 @@ class ConfigUtilitySpec extends Specification {
         result['api.key'] == '******1234'
     }
 
+    void "flatten with custom sensitiveKeyPatterns masks only matching keys"() {
+        given:
+        Map input = [
+            db: [
+                password: 'secretpassword1234'
+            ],
+            custom: [
+                sensitive: 'customsensitive9999'
+            ],
+            api: [
+                key: 'myapikey1234'
+            ]
+        ]
+
+        when:
+        Map<String, Object> result = ConfigUtility.flatten(input, '.', true, ['custom'])
+
+        then:
+        result['db.password'] == 'secretpassword1234'
+        result['custom.sensitive'] == '***************9999'
+        result['api.key'] == 'myapikey1234'
+    }
+
+    void "sanitise with custom sensitiveKeyPatterns masks only matching keys"() {
+        given:
+        Map config = [
+            'app.custom.token': 'tokendatavalue1234',
+            'app.regular.prop': 'regularval1234'
+        ]
+
+        when:
+        Map<String, Object> result = ConfigUtility.sanitise(config, ['TOKEN'])
+
+        then:
+        result['app.custom.token'] == '**************1234'
+        result['app.regular.prop'] == 'regularval1234'
+    }
+
+    void "flatten with comma-separated string containing whitespace masks correctly"() {
+        given:
+        Map input = [
+            db: [
+                password: 'secretpassword1234'
+            ],
+            custom: [
+                secret: 'customsecret9999'
+            ],
+            api: [
+                token: 'mytokenvalue1234'
+            ]
+        ]
+
+        when:
+        Map<String, Object> result = ConfigUtility.flatten(input, '.', true, '  secret ,  token  ')
+
+        then:
+        result['db.password'] == 'secretpassword1234'
+        result['custom.secret'] == '************9999'
+        result['api.token'] == '************1234'
+    }
+
+    void "flatten with list containing whitespace-padded items masks correctly"() {
+        given:
+        Map input = [
+            custom: [
+                secret: 'customsecret9999'
+            ]
+        ]
+
+        when:
+        Map<String, Object> result = ConfigUtility.flatten(input, '.', true, ['  secret  '])
+
+        then:
+        result['custom.secret'] == '************9999'
+    }
+
     void "sanitise should mask sensitive keys preserving last 4 characters when length > 4"() {
         given:
         Map config = [
