@@ -31,18 +31,20 @@ class ConfigUtility {
 
     /**
      * Flattens a nested Map (such as a ConfigObject) into a single-level Map
-     * with dot-separated key paths, and sanitises sensitive values.
+     * with dot-separated key paths, and optionally sanitises sensitive values.
      */
-    static Map<String, Object> flatten(Map<?, ?> sourceMap, String separator = '.') {
+    static Map<String, Object> flatten(Map<?, ?> sourceMap, String separator = '.', boolean maskSensitiveValues = true) {
         Map<String, Object> flattened = [:]
         flattenMap(flattened, sourceMap, "", separator)
-        return sanitise(flattened)
+        return maskSensitiveValues ? sanitise(flattened) : flattened
     }
 
     private static void flattenMap(Map<String, Object> result, Map<?, ?> sourceMap, String prefix, String separator) {
         if (!sourceMap) return
 
-        sourceMap.each { Object key, Object value ->
+        sourceMap.each { entry ->
+            Object key = entry.key
+            Object value = entry.value
             String fullKey = prefix ? "${prefix}${separator}${key}" : key.toString()
             if (value instanceof Map) {
                 flattenMap(result, (Map<?, ?>) value, fullKey, separator)

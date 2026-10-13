@@ -51,7 +51,12 @@ class AlaAdminController implements Controller {
     def viewConfig() {
         try {
             Map config = grailsApplication.getConfig()
-            Map<String, Object> flattened = ConfigUtility.flatten(config, ".")
+            boolean hideSensitiveValues = grailsApplication.config.getProperty(
+                'ala.admin.viewConfig.hideSensitiveValues',
+                Boolean,
+                grailsApplication.config.getProperty('ala.admin.hideSensitiveValues', Boolean, true)
+            )
+            Map<String, Object> flattened = ConfigUtility.flatten(config, ".", hideSensitiveValues)
             render view: "/view-config", model: [config: flattened]
         } catch (Exception e) {
             log.error "Unable to view configuration. Please correct problem and try again: ${e}", e

@@ -56,6 +56,63 @@ class ConfigUtilitySpec extends Specification {
         ConfigUtility.flatten([:]) == [:]
     }
 
+    void "flatten should mask sensitive values by default"() {
+        given:
+        Map input = [
+            api: [
+                key: 'abcdef1234'
+            ],
+            user: [
+                password: 'secretpassword99'
+            ],
+            normal: 'visible-value'
+        ]
+
+        when:
+        Map<String, Object> result = ConfigUtility.flatten(input)
+
+        then:
+        result['api.key'] == '******1234'
+        result['user.password'] == '************rd99'
+        result['normal'] == 'visible-value'
+    }
+
+    void "flatten with maskSensitiveValues false should not mask sensitive values"() {
+        given:
+        Map input = [
+            api: [
+                key: 'abcdef1234'
+            ],
+            user: [
+                password: 'secretpassword99'
+            ],
+            normal: 'visible-value'
+        ]
+
+        when:
+        Map<String, Object> result = ConfigUtility.flatten(input, '.', false)
+
+        then:
+        result['api.key'] == 'abcdef1234'
+        result['user.password'] == 'secretpassword99'
+        result['normal'] == 'visible-value'
+    }
+
+    void "flatten with maskSensitiveValues true should mask sensitive values"() {
+        given:
+        Map input = [
+            api: [
+                key: 'abcdef1234'
+            ]
+        ]
+
+        when:
+        Map<String, Object> result = ConfigUtility.flatten(input, '.', true)
+
+        then:
+        result['api.key'] == '******1234'
+    }
+
     void "sanitise should mask sensitive keys preserving last 4 characters when length > 4"() {
         given:
         Map config = [
