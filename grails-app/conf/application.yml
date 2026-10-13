@@ -12,3 +12,16 @@ info:
             date: '@info.app.build.date@'
 endpoints:
     enabled: true
+ala:
+    admin:
+        hideSensitiveValues: true
+        sensitiveKeyPatterns:
+            - password
+            - secret
+            - key
+            - token
+            - credential
+            - private
+            - bearer
+            - signature
+            - pwd
