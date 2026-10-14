@@ -1,7 +1,9 @@
 package au.org.ala.admin
 
+import groovy.util.logging.Slf4j
 import org.apache.http.HttpStatus
 
+@Slf4j
 class AlaAdminAccessInterceptor {
     static final String ALA_ADMIN_ROLE = "ROLE_ADMIN"
 

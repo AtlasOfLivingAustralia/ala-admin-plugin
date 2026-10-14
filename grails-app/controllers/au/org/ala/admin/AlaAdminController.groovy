@@ -16,12 +16,14 @@ package au.org.ala.admin
 import grails.util.Environment
 import org.grails.config.PropertySourcesConfig
 import org.grails.config.yaml.YamlPropertySourceLoader
+import groovy.util.logging.Slf4j
 import org.springframework.core.io.Resource
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 
 /**
  * Controller for ALA admin functions (requires ROLE_ADMIN)
  */
+@Slf4j
 class AlaAdminController {
 
     SystemMessageService systemMessageService

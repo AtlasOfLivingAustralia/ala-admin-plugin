@@ -64,6 +64,7 @@ tasks.withType(Test) {
 }
 
 bootRun {
+    enabled = false
     jvmArgs('-Dspring.output.ansi.enabled=always')
 }
 // enable if you wish to package this plugin as a standalone application
